@@ -1,7 +1,12 @@
-import Products from "./components/Products/Products";
+import { Products, Navbar } from "./components";
 
 function App() {
-  return <Products></Products>;
+  return (
+    <>
+      <Navbar />
+      <Products />
+    </>
+  );
 }
 
 export default App;

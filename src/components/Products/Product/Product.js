@@ -16,7 +16,7 @@ export default function Product({ product }) {
     <Card className={classes.root}>
       <CardMedia
         className={classes.media}
-        image={"none"}
+        image={product.image}
         title={product.name}
       />
       <CardContent>
@@ -26,7 +26,7 @@ export default function Product({ product }) {
           </Typography>
           <Typography variant="h5">{product.price}</Typography>
         </div>
-        <Typography variant="h2" color="textSecoundary">
+        <Typography variant="body2" color="textSecoundary">
           {product.description}
         </Typography>
       </CardContent>
