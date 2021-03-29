@@ -17,7 +17,7 @@ import useStyles from "./styles";
 const PrimarySearchAppBar = ({ totalItems }) => {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const classes = useStyles();
-  // const location = useLocation();
+  const location = useLocation();
 
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -36,11 +36,17 @@ const PrimarySearchAppBar = ({ totalItems }) => {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton to="/cart" aria-label="Show cart items" color="inherit">
+        <IconButton
+          component={Link}
+          to="/cart"
+          aria-label="Show cart items"
+          color="inherit"
+        >
           <Badge badgeContent={totalItems} color="secondary">
             <ShoppingCart />
           </Badge>
         </IconButton>
+
         <p>Cart</p>
       </MenuItem>
     </Menu>
@@ -51,6 +57,7 @@ const PrimarySearchAppBar = ({ totalItems }) => {
       <AppBar position="fixed" className={classes.appBar} color="inherit">
         <Toolbar>
           <Typography
+            component={Link}
             to="/"
             variant="h6"
             className={classes.title}
@@ -65,15 +72,20 @@ const PrimarySearchAppBar = ({ totalItems }) => {
             Commerce.js
           </Typography>
           <div className={classes.grow} />
-
-          <div className={classes.button}>
-            <IconButton to="/cart" aria-label="Show cart items" color="inherit">
-              <Badge badgeContent={totalItems} color="secondary">
-                <ShoppingCart />
-              </Badge>
-            </IconButton>
-          </div>
-          {/* )} */}
+          {location.pathname === "/" && (
+            <div className={classes.button}>
+              <IconButton
+                component={Link}
+                to="/cart"
+                aria-label="Show cart items"
+                color="inherit"
+              >
+                <Badge badgeContent={totalItems} color="secondary">
+                  <ShoppingCart />
+                </Badge>
+              </IconButton>
+            </div>
+          )}
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
