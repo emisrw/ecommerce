@@ -68,7 +68,7 @@ const PrimarySearchAppBar = ({ totalItems }) => {
 
           <div className={classes.button}>
             <IconButton to="/cart" aria-label="Show cart items" color="inherit">
-              <Badge badgeContent={2} color="secondary">
+              <Badge badgeContent={totalItems} color="secondary">
                 <ShoppingCart />
               </Badge>
             </IconButton>
