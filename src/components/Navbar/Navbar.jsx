@@ -46,7 +46,6 @@ const PrimarySearchAppBar = ({ totalItems }) => {
             <ShoppingCart />
           </Badge>
         </IconButton>
-
         <p>Cart</p>
       </MenuItem>
     </Menu>

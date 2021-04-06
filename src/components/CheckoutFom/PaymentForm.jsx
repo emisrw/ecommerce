@@ -6,27 +6,32 @@ import {
   ElementsConsumer,
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+
 import Review from "./Review";
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const PaymentForm = ({
   checkoutToken,
-  shippingData,
   nextStep,
   backStep,
+  shippingData,
   onCaptureCheckout,
 }) => {
   const handleSubmit = async (event, elements, stripe) => {
     event.preventDefault();
+
     if (!stripe || !elements) return;
+
     const cardElement = elements.getElement(CardElement);
+
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: cardElement,
     });
+
     if (error) {
-      console.log(error);
+      console.log("[error]", error);
     } else {
       const orderData = {
         line_items: checkoutToken.live.line_items,
@@ -51,10 +56,13 @@ const PaymentForm = ({
           },
         },
       };
+
       onCaptureCheckout(checkoutToken.id, orderData);
+
       nextStep();
     }
   };
+
   return (
     <>
       <Review checkoutToken={checkoutToken} />
@@ -69,7 +77,7 @@ const PaymentForm = ({
               <CardElement />
               <br /> <br />
               <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <Button onClick={backStep} variant="outlined">
+                <Button variant="outlined" onClick={backStep}>
                   Back
                 </Button>
                 <Button
